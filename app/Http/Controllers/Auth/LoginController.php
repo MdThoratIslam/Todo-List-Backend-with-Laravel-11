@@ -19,14 +19,14 @@ class LoginController extends Controller
             {
                 return response()->json(['message' => 'Invalid login details'], 401);
             }
-            // Retrieve the authenticated user
+            // Retrieve the authenticated User
             $user = auth()->user();
-            //$token = $user->createToken('auth_token')->plainTextToken;
+            //$token = $User->createToken('auth_token')->plainTextToken;
             $token = $user->createToken('auth_token')->plainTextToken;
-            // Return success response with user details and token
+            // Return success response with User details and token
             return response()->json([
                 'message' => 'User logged in successfully',
-                'user' => $user,
+                'User' => $user,
                 'token' => $token
             ], 200);
         } catch (\Exception $e)
