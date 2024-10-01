@@ -1,28 +1,6 @@
 <?php
-
-namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateTaskRequest extends FormRequest
+namespace App\Http\Requests\Task;
+class UpdateTaskRequest extends StoreTaskRequest
 {
-    /**
-     * Determine if the User is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
-    {
-        return [
-            //
-        ];
-    }
 }
