@@ -49,6 +49,11 @@ php artisan migrate
 php artisan serve --host=192.168.1.77 --port=8080
 ```
 
+## Create Database 
+```bash
+create database db_backend_api_task;
+```
+
 ### 3. Make Model and also related all file create
 ```bash
 php artisan make:model Task/Task --all
