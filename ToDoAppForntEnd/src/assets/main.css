@@ -12432,7 +12432,7 @@ body .fc {
   background: #d7d7d7;
 }
 
-/* Icons (inline elements with styled text that mock arrow icons)
+/* Icons (inline elements with styled text that mock arrow Icons)
 --------------------------------------------------------------------------------------------------*/
 .fc-icon {
   display: inline-block;
@@ -12452,7 +12452,7 @@ body .fc {
 }
 
 /*
-Acceptable font-family overrides for individual icons:
+Acceptable font-family overrides for individual Icons:
 	"Arial", sans-serif
 	"Times New Roman", serif
 
@@ -12560,7 +12560,7 @@ NOTE: use percentage font sizes or else old IE chokes
   border-bottom-right-radius: 4px;
 }
 
-/* icons in buttons */
+/* Icons in buttons */
 .fc button .fc-icon {
   /* non-theme */
   position: relative;
