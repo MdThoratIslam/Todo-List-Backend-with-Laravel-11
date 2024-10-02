@@ -15,18 +15,18 @@ class TaskController extends Controller
     {
         try
         {
-            $tasks = Task::orderBy('id')->cursorPaginate(5);
+            $tasks                      = Task::orderBy('id')->cursorPaginate(5);
             if ($tasks->isEmpty())
             {
                 return response()->json(
-                    ['message'      => 'No tasks found.'
+                    ['message'          => 'No tasks found.'
                     ]);
             }
             Log::info('Tasks fetched successfully.');
             return response()->json(
                 [
-                'message'           => 'Tasks fetched successfully.',
-                'data'              => TaskResource::collection($tasks)
+                'message'               => 'Tasks fetched successfully.',
+                'data'                  => TaskResource::collection($tasks)
             ], 200);
         } catch (\Exception $e)
         {

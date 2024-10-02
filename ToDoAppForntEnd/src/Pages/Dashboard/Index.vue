@@ -1,4 +1,26 @@
 <script setup>
+import {onMounted , ref} from "vue";
+import { format } from 'date-fns';
+import {allTasks, createTask,updateTask,deleteTask,getTask,completeTask} from "../../http/tasks.api.js";
+import Tasks from "@/components/Tasks/TasksList.vue";
+const tasks = ref([]);
+onMounted(async () =>
+{
+  const {data} = await allTasks();
+  //console.log(data);
+  tasks.value = data.data;
+});
+
+// Function to format date
+const formatDate = (date) =>
+{
+  return format(new Date(date), 'dd/MM/yyyy');
+};
+// Function to format time
+const formatTime = (time) =>
+{
+  return format(new Date(time), 'HH:mm a');
+};
 
 </script>
 
@@ -52,16 +74,8 @@
       <div class="col-md-6">
         <div class="tile">
           <h3 class="tile-title">Complete Tasks</h3>
-          <ul>
-            <li>Built with Bootstrap 4, SASS and PUG.js</li>
-            <li>Fully responsive and modular code</li>
-            <li>Seven pages including login, user profile and print friendly invoice page</li>
-            <li>Smart integration of forgot password on login page</li>
-            <li>Chart.js integration to display responsive charts</li>
-            <li>Widgets to effectively display statistics</li>
-            <li>Data tables with sort, search and paginate functionality</li>
-            <li>Custom form elements like toggle buttons, auto-complete, tags and date-picker</li>
-            <li>A inbuilt toast library for providing meaningful response messages to user's actions</li>
+          <ul class="list-group list-group-flush">
+            <Tasks :tasks="tasks" :formatDate="formatDate" :formatTime="formatTime"/>
           </ul>
         </div>
       </div>
@@ -87,5 +101,4 @@
 </template>
 
 <style scoped>
-
 </style>
