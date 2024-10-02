@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f27f2545-ba67-495a-a27f-2ffc6faf867b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ToDoAppForntEnd/src/Pages/Dashboard/Index.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ToDoAppForntEnd/src/http/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoAppForntEnd/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoAppForntEnd/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoAppForntEnd/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoAppForntEnd/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoAppForntEnd/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoAppForntEnd/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoAppForntEnd/src/components/LeftSidebar.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ToDoAppForntEnd/src/components/Navbar.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoAppForntEnd/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoAppForntEnd/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Vue Composition API Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -199,7 +192,7 @@
       <option name="presentableId" value="Default" />
       <updated>1727851638561</updated>
       <workItem from="1727851641545" duration="141000" />
-      <workItem from="1727851869859" duration="2770000" />
+      <workItem from="1727851869859" duration="3371000" />
     </task>
     <servers />
   </component>
