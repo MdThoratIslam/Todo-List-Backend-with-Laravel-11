@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -16,6 +17,7 @@ class UserController extends Controller
     {
         $user = User::get();
         $user_resource= UserResource::collection($user);
+        Log::info('User data has been fetched successfully!!');
         return response()->json([
             'massege' => "User data has been fetched successfully!!",
             'data'=> $user_resource
