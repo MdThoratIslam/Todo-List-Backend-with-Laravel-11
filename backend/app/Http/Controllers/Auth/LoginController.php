@@ -6,33 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
     public function __invoke(LoginRequest $request)
     {
         try {
-            if (!auth()->attempt($request->only('email', 'password')))
+            // Attempt to authenticate the user and retrieve the token
+            if (!$token = JWTAuth::attempt($request->only('email', 'password')))
             {
                 return response()->json(['message' => 'Invalid login details'], 401);
             }
-            // Retrieve the authenticated User
             $user = auth()->user();
-            //$token = $User->createToken('auth_token')->plainTextToken;
-            $token = $user->createToken('auth_token')->plainTextToken;
-            // Return success response with User details and token
             return response()->json([
                 'message' => 'User logged in successfully',
-                'User' => $user,
+                'user' => $user,
                 'token' => $token
             ], 200);
-        } catch (\Exception $e)
 
-        {
-            // Return error response if an exception occurs
+        } catch (\Exception $e) {
+            // Catch any exceptions and return an error response
             return response()->json([
                 'message' => $e->getMessage(),
                 'error' => 'Failed to login'

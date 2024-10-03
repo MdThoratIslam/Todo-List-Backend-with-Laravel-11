@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class RegistrationRequest extends FormRequest
 {
@@ -35,6 +36,13 @@ class RegistrationRequest extends FormRequest
     {
         $data                       = $this->validated();
         $data['password']           = bcrypt($data['password']);
+        $data['email_verified_at']  = now();
+        $data['status_active']      = 1;
+        $data['is_delete']          = 0;
+        $data['created_at']         = now();
+        $data['updated_at']         = null;
+        $data['role']               = 'Customer';
+        $data['remember_token']     = Str::random(10);
         return $data;
     }
 }

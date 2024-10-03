@@ -13,7 +13,7 @@ class TaskPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->hasPermissionTo('task-list') ?? Response::deny('You are not authorized to view tasks.');
     }
 
     /**

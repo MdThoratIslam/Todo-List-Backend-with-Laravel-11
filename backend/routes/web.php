@@ -15,3 +15,15 @@ Route::prefix('auth')->group(function ()
     Route::post('login', LoginController::class);
     Route::post('logout', LogoutController::class);
 });
+
+
+//Route::group([
+////    'middleware' => 'jwt',
+//    'prefix' => 'auth'
+//], function ($router) {
+//    Route::post('register', RegisterController::class);
+//    Route::post('login', LoginController::class);
+//    Route::post('logout', LogoutController::class);
+//
+//    Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth:api');
+//});

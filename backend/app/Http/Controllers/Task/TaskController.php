@@ -8,13 +8,20 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Requests\Task\StoreTaskRequest;
 use App\Http\Requests\Task\UpdateTaskRequest;
 use App\Http\Resources\Task\TaskResource;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 
 class TaskController extends Controller
 {
+    use AuthorizesRequests;
     public function index()
     {
         try
         {
+            if (!$this->authorize('viewAny', Task::class))
+            {
+                return response()->json(['message' => 'Unauthorized'], 403);
+            }
             $tasks                      = Task::orderBy('id')->cursorPaginate(5);
             if ($tasks->isEmpty())
             {
