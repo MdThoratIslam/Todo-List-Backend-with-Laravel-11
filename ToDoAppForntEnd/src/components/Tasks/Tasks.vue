@@ -1,5 +1,4 @@
 <script setup>
-
 import Tasks from "@/components/Tasks/TasksList.vue";
 defineProps({
   tasks: Array,
