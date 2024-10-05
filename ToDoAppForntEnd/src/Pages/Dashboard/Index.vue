@@ -75,7 +75,7 @@ const formatTime = (time) =>
         <div class="tile">
           <h3 class="tile-title">Complete Tasks</h3>
           <ul class="list-group list-group-flush">
-            <Tasks :tasks="tasks" :formatDate="formatDate" :formatTime="formatTime"/>
+            <Tasks v-for="task in tasks" :task="task" :key="task.id" :formatDate="formatDate" :formatTime="formatTime"/>
           </ul>
         </div>
       </div>

@@ -24,6 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
             {
                 return response()->json([
                     'message' => $e->getMessage(),
+                    'line'    => $e->getLine()  // Fix the method here to get the exception line
                 ], 401);
             }
         });

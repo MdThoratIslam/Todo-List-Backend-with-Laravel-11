@@ -11,4 +11,5 @@ Route::middleware('auth:api')->group(function ()
     Route::apiResource('/users',                       UserController::class);
 });
 Route::apiResource('/tasks',                       TaskController::class);
+
 Route::patch('/tasks/{task}/complete',             CompleteTaskController::class);

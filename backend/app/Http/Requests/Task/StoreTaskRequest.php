@@ -17,9 +17,10 @@ class StoreTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $user = auth()->user();
-        // Check if the User has the required permission
-        return $user->hasPermissionTo('task-create') ?? $this->failedAuthorization();
+//        $user = auth()->user();
+//        // Check if the User has the required permission
+//        return $user->hasPermissionTo('task-create') ?? $this->failedAuthorization();
+        return true;
     }
     // if authorized, return false then customize the message
     public function failedAuthorization()

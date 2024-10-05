@@ -3,17 +3,17 @@ import IconPencilFill from "@/components/Icons/iconPencilFill.vue";
 import IconsTrashFill from "@/components/Icons/iconsTrashFill.vue";
 import {computed} from "vue";
 const props= defineProps({
-  tasks: Object,
+  task: Object,
   formatDate: Function,
   formatTime: Function
 });
-const completedClass = computed(()=>props.tasks.is_completed ? "completed" :"")
+const completedClass = computed(()=>props.task.is_completed ? "completed" :"")
 </script>
 
 <template>
-  <li class="list-group-item py-3" v-for="task in tasks" :key="task.id">
+  <li class="list-group-item py-3" >
     <div class="d-flex justify-content-start align-items-center">
-      <input class="form-check-input mt-0" :class="completedClass" type="checkbox" :checked="props.tasks.is_completed"/>
+      <input class="form-check-input mt-0" :class="completedClass" type="checkbox" :checked="props.task.is_completed"/>
       <div class="ms-2 flex-grow-1 " :class="completedClass" title="Double click the text to edit or remove">
         <span>{{task.name}}</span>
       </div>

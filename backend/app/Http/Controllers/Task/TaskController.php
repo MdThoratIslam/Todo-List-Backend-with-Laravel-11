@@ -18,10 +18,12 @@ class TaskController extends Controller
     {
         try
         {
-            if (!$this->authorize('viewAny', Task::class))
-            {
-                return response()->json(['message' => 'Unauthorized'], 403);
-            }
+//            if (!$this->authorize('viewAny', Task::class))
+//            {
+//                return response()->json([
+//                    'message' => 'You are not authorized to view this resource. Please contact your administrator for access.'
+//                ], 403);
+//            }
             $tasks                      = Task::orderBy('id')->cursorPaginate(5);
             if ($tasks->isEmpty())
             {
