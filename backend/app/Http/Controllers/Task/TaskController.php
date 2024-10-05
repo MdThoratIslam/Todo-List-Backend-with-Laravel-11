@@ -24,7 +24,7 @@ class TaskController extends Controller
 //                    'message' => 'You are not authorized to view this resource. Please contact your administrator for access.'
 //                ], 403);
 //            }
-            $tasks                      = Task::orderBy('id')->cursorPaginate(5);
+            $tasks                      = Task::orderBy('id')->get();
             if ($tasks->isEmpty())
             {
                 return response()->json(
@@ -51,7 +51,8 @@ class TaskController extends Controller
     {
         try {
             $validatedData                      = $request->validated();
-            $validatedData['user_id']           = auth()->user()->id;
+//            $validatedData['user_id']           = auth()->user()->id;
+            $validatedData['user_id']           = 1;
             $validatedData['status_active']     = $validatedData['status_active'] ?? 1;
             $validatedData['is_delete']         = $validatedData['is_delete'] ?? 0;
             $task                               = Task::create($validatedData);

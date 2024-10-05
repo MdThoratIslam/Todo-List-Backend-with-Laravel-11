@@ -7,14 +7,14 @@ const props= defineProps({
   formatDate: Function,
   formatTime: Function
 });
-const completedClass = computed(()=>props.task.is_completed ? "completed" :"")
+const completedClass = computed(()=>props.task.is_completed == 1 ? 'completed text-primary' : ' text-danger');
 </script>
 
 <template>
   <li class="list-group-item py-3" >
-    <div class="d-flex justify-content-start align-items-center">
+    <div class="d-flex justify-content-start align-items-center" :class="completedClass">
       <input class="form-check-input mt-0" :class="completedClass" type="checkbox" :checked="props.task.is_completed"/>
-      <div class="ms-2 flex-grow-1 " :class="completedClass" title="Double click the text to edit or remove">
+      <div class="ms-2 flex-grow-1 " title="Double click the text to edit or remove">
         <span>{{task.name}}</span>
       </div>
       <!--                task.created_at date formate use -->
