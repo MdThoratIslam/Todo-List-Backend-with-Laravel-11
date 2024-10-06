@@ -17,35 +17,6 @@ const emit = defineEmits(['deleteTask', 'editTask']);
 </template>
 
 <style scoped>
-.form-check-input.completed {
-  filter: none;
-  opacity: 0.5;
-}
-
-.completed {
-  color: #9ca3af;
-  text-decoration: line-through;
-}
-
-.task-date {
-  color: #6b7280;
-  font-size: 11px;
-  padding: 0 2px;
-}
-.list-group-item:hover .task-actions {
-  visibility: visible;
-  opacity: 1;
-}
-
-.task-actions {
-  position: absolute;
-  top: 50%;
-  right: 120px;
-  transform: translateY(-50%);
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.2s, opacity 0.3s linear;
-}
 
 .btn-circle {
   width: 30px;

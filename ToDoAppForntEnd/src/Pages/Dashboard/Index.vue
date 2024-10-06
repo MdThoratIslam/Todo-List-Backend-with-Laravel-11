@@ -1,37 +1,54 @@
 <script setup>
-import {onMounted , ref, computed} from "vue";
+import { onMounted, ref, computed } from "vue";
 import { format } from 'date-fns';
-import {allTasks , createTask} from "../../http/tasks.api.js";
+import { allTasks, createTask, updateTask } from "../../http/tasks.api.js";
 import Tasks from "@/components/Tasks/Tasks.vue";
 import NewTask from "@/components/Tasks/NewTask.vue";
 
 const tasks = ref([]);
+const newTask = ref({ name: '' }); // New task reference
 
 // Function to format date
-const formatDate = (date) => {
-  return format(new Date(date), 'dd/MM/yyyy');
-};
+const formatDate = (date) => format(new Date(date), 'dd/MM/yyyy');
 
 // Function to format time
-const formatTime = (time) => {
-  return format(new Date(time), 'HH:mm a');
-};
-onMounted(async () =>
-{
-  const {data} = await allTasks();
-  tasks.value = data.data;
-  console.log(data);
+const formatTime = (time) => format(new Date(time), 'HH:mm a');
+
+// Fetch tasks on mounted
+onMounted(async () => {
+  try {
+    const { data } = await allTasks();
+    tasks.value = data.data;
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+  }
 });
+
 // Computed properties for filtering completed and uncompleted tasks
 const uncompletedTasks = computed(() => tasks.value.filter(task => !task.is_completed));
 const completedTasks = computed(() => tasks.value.filter(task => task.is_completed));
 
-
-
+// Handle adding a new task
 const handleAddTask = async (newTask) => {
-  const {data} = await createTask(newTask); // Use 'data' here
-  tasks.value.unshift(data.data); // Append the new task to the tasks array
+  try {
+    const { data } = await createTask(newTask);
+    tasks.value.unshift(data.data); // Add new task to the tasks array
+    newTask.name = ''; // Clear the input after adding
+  } catch (error) {
+    console.error("Error adding task:", error);
+  }
 };
+
+// Handle updating a task
+const handleUpdatedTask = async (task) => {
+  const { data: updatedTask } = await updateTask(task.id, {
+    name: task.name
+  })
+  const currentTask = tasks.value.find(item => item.id === task.id);
+  currentTask.name = updatedTask.data.name;
+}
+
+
 </script>
 
 <template>
@@ -39,7 +56,7 @@ const handleAddTask = async (newTask) => {
     <div class="app-title">
       <div>
         <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
-        <p>A free and open source Bootstrap 4 admin template</p>
+        <p>A free and open-source Bootstrap 4 admin template</p>
       </div>
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
@@ -80,24 +97,34 @@ const handleAddTask = async (newTask) => {
         </div>
       </div>
     </div>
+
     <div class="row">
-<!--      need a input field for add task-->
+      <!-- Input field for adding a task -->
       <div class="col-md-12">
         <div class="tile">
           <h3 class="tile-title mb-3">Add Task</h3>
           <NewTask @addTask="handleAddTask"/>
         </div>
       </div>
+
+      <!-- Uncompleted Tasks -->
       <div class="col-md-6">
-        <div class="tile" :v-if="tasks.length">
+        <div class="tile" v-if="tasks.length">
           <h3 class="tile-title">Uncompleted Tasks</h3>
-          <Tasks :tasks="uncompletedTasks" :formatDate="formatDate" :formatTime="formatTime"/>
-          </div>
+          <Tasks :tasks="uncompletedTasks"
+                 @updated="handleUpdatedTask"
+                 :formatDate="formatDate"
+                 :formatTime="formatTime" />
+        </div>
       </div>
+
+      <!-- Completed Tasks -->
       <div class="col-md-6">
-        <div class="tile" :v-if="tasks.length">
+        <div class="tile" v-if="tasks.length">
           <h3 class="tile-title">Completed Tasks</h3>
-          <Tasks :tasks="completedTasks" :formatDate="formatDate" :formatTime="formatTime"/>
+          <Tasks :tasks="completedTasks"
+                 :formatDate="formatDate"
+                 :formatTime="formatTime" />
         </div>
       </div>
     </div>

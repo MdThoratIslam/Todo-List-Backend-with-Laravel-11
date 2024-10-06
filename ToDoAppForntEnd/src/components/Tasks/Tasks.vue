@@ -10,7 +10,12 @@ defineProps({
 
 <template>
   <ul  class="list-group list-group-flush">
-    <Tasks v-for="task in tasks" :task="task" :key="task.id" :formatDate="formatDate" :formatTime="formatTime"/>
+    <Tasks
+        v-for="task in tasks" :task="task" :key="task.id"
+        :formatDate="formatDate"
+        :formatTime="formatTime"
+        @updated="$event=>$emit('updated',$event)"
+    />
   </ul>
 </template>
 

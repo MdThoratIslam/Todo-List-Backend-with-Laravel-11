@@ -6,9 +6,20 @@ const props= defineProps({
   formatDate: Function,
   formatTime: Function
 });
+
+const completedClass = computed(()=>props.task.is_completed == 1 ? 'completed text-primary' : ' text-danger');
+
+// ========================== This Box is Edit and Update Working=============================================
+const emit = defineEmits(['updated'])
 const isEditable = ref(false);
 const vFocus = {mounted:(el) => el.focus()};
-const completedClass = computed(()=>props.task.is_completed == 1 ? 'completed text-primary' : ' text-danger');
+const updateTask = event=>
+{
+  const updateTask = {...props.task, name: event.target.value}
+  isEditable.value=false
+  emit('updated', updateTask)
+}
+//============================================================================================================
 </script>
 
 <template>
@@ -19,7 +30,11 @@ const completedClass = computed(()=>props.task.is_completed == 1 ? 'completed te
            @dblclick="$event => isEditable = true"
            title="Double click the text to edit or remove">
         <div class="relative"  v-if="isEditable">
-          <input class="editable-task" type="text" @keyup.esc="$event => isEditable = false" v-focus/>
+          <input class="editable-task"
+                 type="text"
+                 @keyup.esc="$event => isEditable = false" v-focus
+                 @keyup.enter="updateTask"
+          />
         </div>
         <span v-else>{{task.name}}</span>
       </div>
@@ -34,6 +49,30 @@ const completedClass = computed(()=>props.task.is_completed == 1 ? 'completed te
 </template>
 
 <style scoped>
+.form-check-input.completed {
+  filter: none;
+  opacity: 0.5;
+}
+.task-date {
+  color: #6b7280;
+  font-size: 11px;
+  padding: 0 2px;
+}
+.list-group-item:hover .task-actions {
+  visibility: visible;
+  opacity: 1;
+}
+
+.task-actions {
+  position: absolute;
+  top: 50%;
+  right: 120px;
+  transform: translateY(-50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.2s, opacity 0.3s linear;
+}
+
 
 .editable-task {
   width: 100%;
@@ -50,6 +89,10 @@ const completedClass = computed(()=>props.task.is_completed == 1 ? 'completed te
 
 .edit-item input[type="text"] {
   color: #999;
+}
+.completed {
+  color: #9ca3af;
+  text-decoration: line-through;
 }
 
 </style>
